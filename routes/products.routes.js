@@ -24,12 +24,8 @@ router.patch('/:id', async (req, res) => {
     const updatedProduct = await service.update(id, body);
     res.json(updatedProduct);
   } catch (error) {
-    res.status(404).json({
-      message: error.message
-    })
+    next(error);
   }
-
-
 });
 
 router.delete('/:id', async (req, res) => {

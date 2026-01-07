@@ -1,11 +1,25 @@
 const express = require("express");
 const routerAPI = require("./routes");
+const cors = require("cors");
 const {logErrors, errorHandler, boomErrorHandler} = require("./middlewares/error.handler");
 
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+
+const whiteList = ['http://localhost:8080'];
+const options = {
+  origin: (origin, callback) => {
+    if (whiteList.includes(origin)) {
+      callback(null, true);
+    }else {
+      callback(new Error("No permitido por cors"));
+    }
+  }
+}
+
+app.use(cors(options));
 routerAPI(app);
 
 app.get("/", (req, res) => {

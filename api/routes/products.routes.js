@@ -1,11 +1,11 @@
-const { Router } = require('express');
-const ProductsService = require('../services/products.services');
-const { validationHandler } = require('../middlewares/validation.handler');
-const {
+import { Router } from 'express';
+import ProductsService from '../services/products.services.js';
+import { validationHandler } from '../middlewares/validation.handler.js';
+import {
   createProductSchema,
   updateProductSchema,
   getProductSchema,
-} = require('../schema/product.schema.js');
+} from '../schema/product.schema.js';
 
 const router = Router();
 const service = new ProductsService();
@@ -65,4 +65,4 @@ router.get(
   },
 );
 
-module.exports = router;
+export default router;

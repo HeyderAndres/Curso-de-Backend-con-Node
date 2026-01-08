@@ -1,7 +1,7 @@
-const express = require("express");
-const routerAPI = require("./routes");
-const cors = require("cors");
-const {logErrors, errorHandler, boomErrorHandler} = require("./middlewares/error.handler");
+import express  from "express";
+import routerAPI from "./routes/index.js";
+import cors from "cors";
+import { logErrors, errorHandler, boomErrorHandler } from "./middlewares/error.handler.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -31,10 +31,10 @@ app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`server runing in port ${port}`);
+  });
+}
 
-// app.listen(port, () => {
-//   console.log(`server runing in port ${port}`);
-// });
-
-
-module.exports = app;
+export default app;

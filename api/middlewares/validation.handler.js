@@ -1,4 +1,4 @@
-const boom = require("@hapi/boom")
+import boom from "@hapi/boom"
 
 function validationHandler(schema, property) {
  return (req, res, next) => {
@@ -13,4 +13,4 @@ function validationHandler(schema, property) {
  }
 }
 
-module.exports = { validationHandler}
+export { validationHandler}

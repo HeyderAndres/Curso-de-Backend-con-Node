@@ -2,7 +2,7 @@
   "name": "curso-de-backend-con-node",
   "version": "1.0.0",
   "description": "",
-  "main": "api/app.js",
+  "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
     "start": "node app.js",

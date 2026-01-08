@@ -2,10 +2,10 @@
   "name": "curso-de-backend-con-node",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "api/app.js",
   "scripts": {
-    "dev": "nodemon api/app.js",
-    "start": "node api/app.js",
+    "dev": "nodemon app.js",
+    "start": "node app.js",
     "lint": "eslint"
   },
   "keywords": [],

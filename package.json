@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js",
-    "start": "node app.js",
+    "dev": "nodemon api/app.js",
+    "start": "node api/app.js",
     "lint": "eslint"
   },
   "keywords": [],
@@ -25,5 +25,8 @@
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "joi": "^18.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

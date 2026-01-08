@@ -4,14 +4,14 @@ const cors = require("cors");
 const {logErrors, errorHandler, boomErrorHandler} = require("./middlewares/error.handler");
 
 const app = express();
-const PORT = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
 const whiteList = ['http://localhost:8080'];
 const options = {
   origin: (origin, callback) => {
-    if (whiteList.includes(origin)) {
+    if (whiteList.includes(origin) || !origin) {
       callback(null, true);
     }else {
       callback(new Error("No permitido por cors"));
@@ -22,7 +22,7 @@ const options = {
 app.use(cors(options));
 routerAPI(app);
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Hello World!!");
 });
 
@@ -30,8 +30,8 @@ app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`server runing in port ${PORT}`);
+app.listen(port, () => {
+  console.log(`server runing in port ${port}`);
 });
 
 

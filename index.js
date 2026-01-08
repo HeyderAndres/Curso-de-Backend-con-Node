@@ -30,9 +30,10 @@ app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(`server runing in port ${port}`);
-});
+
+// app.listen(port, () => {
+//   console.log(`server runing in port ${port}`);
+// });
 
 
-
+export default app;

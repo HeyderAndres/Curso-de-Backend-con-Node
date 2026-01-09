@@ -8,19 +8,18 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// const whiteList = ['http://localhost:8080'];
-// const options = {
-//   origin: (origin, callback) => {
-//     if (whiteList.includes(origin) || !origin) {
-//       callback(null, true);
-//     }else {
-//       callback(new Error("No permitido por cors"));
-//     }
-//   }
-// }
+const whiteList = ['http://localhost:8080'];
+const options = {
+  origin: (origin, callback) => {
+    if (whiteList.includes(origin) || !origin) {
+      callback(null, true);
+    }else {
+      callback(new Error("No permitido por cors"));
+    }
+  }
+}
 
-// app.use(cors(options));
-app.use(cors());
+app.use(cors(options));
 routerAPI(app);
 
 app.get("/", (req, res) => {

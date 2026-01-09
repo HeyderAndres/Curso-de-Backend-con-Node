@@ -1,10 +1,13 @@
 import { faker } from '@faker-js/faker';
 import boom from '@hapi/boom';
+import { pool } from '../libs/postgres.pool.js';
 
 class ProductsService {
   constructor() {
     this.products = [];
     this.generate();
+    this.pool = pool;
+    this.pool.on('error', (err) => boom.internal('Unexpected error on idle client', err.message));
   }
 
   generate() {

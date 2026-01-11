@@ -1,5 +1,5 @@
 import { Router } from "express";
-import UserService from "../services/user.servic.js";
+import UserService from "../services/user.service.js";
 
 const router = Router();
 const service = new UserService();
@@ -32,7 +32,7 @@ router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const user = await service.findOne(id);
   res.json(user);
-})
+});
 
 
 export default router;

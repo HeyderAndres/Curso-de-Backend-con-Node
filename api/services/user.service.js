@@ -1,28 +1,49 @@
-import { getConection } from '../libs/postgres';
+import { models } from "../libs/sequelize.js";
+import boom from '@hapi/boom';
 
 class UserService {
 
   constructor(){
-    this.conection = getConection();
   }
 
   async create(data) {
-    return data;
+    try {
+      const newUser = await models.User.create(data);
+      return newUser;
+    } catch (error) {
+      throw boom.conflict(error.message);
+    }
   }
 
   async find() {
-    const client = await this.conection;
-
+    const users = await models.User.findAll();
+    return users;
   }
 
   async findOne(id) {
-    return { id };
+    const user = await models.User.findOne({
+      where: { id }
+    });
+    if (!user) {
+      throw boom.notFound('User not found');
+    }
+    return user;
   }
+
+
   async update(id, changes) {
-    return { id, ...changes };
+    const user = await models.User.update(changes, {
+      where: { id }
+    })
+    
+    return { id };
   }
 
   async delete(id) {
+    const result = await models.User.destroy({
+      where: { id }
+    })
+
     return { id };
   }
 }

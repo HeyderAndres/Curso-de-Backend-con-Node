@@ -15,7 +15,27 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@mystore.com
-      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_DEFAULT_EMAIL=${DB_INTERFACE_USER}
+      - PGADMIN_DEFAULT_PASSWORD=${DB_INTERFACE_PASSWORD}
     ports:
-      - 5050:80
+      - ${DB_INTERFACE_PORT}:80
+
+  mysql:
+    image: mysql:latest
+    environment:
+    - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    - MYSQL_DATABASE=${DB_NAME}
+    - MYSQL_USER=${DB_USER}
+    ports:
+      - ${DB_PORT}:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_INTERFACE_PASSWORD}
+      - PMA_HOST=mysql
+    ports:
+      - ${DB_INTERFACE_PORT}:80
+

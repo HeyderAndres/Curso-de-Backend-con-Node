@@ -26,15 +26,16 @@ services:
     - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     - MYSQL_DATABASE=${DB_NAME}
     - MYSQL_USER=${DB_USER}
+    - MYSQL_PASSWORD=${DB_PASSWORD}
     ports:
       - ${DB_PORT}:3306
     volumes:
-      - mysql_data:/var/lib/mysql
+      - ./mysql_data:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_INTERFACE_PASSWORD}
+      - PMA_PORT=${DB_PORT}
       - PMA_HOST=mysql
     ports:
       - ${DB_INTERFACE_PORT}:80

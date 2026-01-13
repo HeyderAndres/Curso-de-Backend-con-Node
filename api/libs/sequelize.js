@@ -5,18 +5,24 @@ import { setupModels } from "../db/models/index.js";
 const USER = encodeURIComponent(config.db.user);
 const PASSWORD = encodeURIComponent(config.db.password);
 
-// const URI = `postgresql://${USER}:${PASSWORD}@${config.db.host}:${config.db.port}/${config.db.database}`;
-const URI = `mysql://${USER}:${PASSWORD}@${config.db.host}:${config.db.port}/${config.db.database}`;
+const URI = `postgresql://${USER}:${PASSWORD}@${config.db.host}:${config.db.port}/${config.db.database}`;
+// const URI = `mysql://${USER}:${PASSWORD}@${config.db.host}:${config.db.port}/${config.db.database}`;
+console.log(
+  config.db.user,
+  config.db.password,
+  config.db.host,
+  config.db.port,
+  config.db.database,
+);
 
 
 const sequelize = new Sequelize(URI, {
-  dialect: 'mysql',
-  // dialect: 'postgres',
+  // dialect: 'mysql',
+  dialect: 'postgres',
   logging: true,
 });
 
 setupModels(sequelize);
-sequelize.sync();
 
 const { models } = sequelize;
 export { models };

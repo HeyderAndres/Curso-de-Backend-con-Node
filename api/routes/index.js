@@ -2,6 +2,7 @@ import { Router } from "express";
 import  productsRouter from "./products.routes.js";
 // const categoriesRouter = require('./categories.routes');
 import usersRouter from './users.routes.js';
+import customersRouter from './customers.routes.js';
 const router = Router();
 
 function routerAPI(app) {
@@ -9,6 +10,8 @@ function routerAPI(app) {
   router.use('/products', productsRouter);
   // app.use('/categories', categoriesRouter);
   router.use('/users', usersRouter);
+  router.use('/customers', customersRouter);
+
 
 }
 

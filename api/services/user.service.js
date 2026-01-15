@@ -8,7 +8,9 @@ class UserService {
 
   async create(data) {
     try {
-      const newUser = await models.User.create(data);
+      const newUser = await models.User.create(data, {
+        include: ['customer']
+      });
       return newUser;
     } catch (error) {
       throw boom.conflict(error.message);
@@ -16,7 +18,7 @@ class UserService {
   }
 
   async find() {
-    const users = await models.User.findAll();
+    const users = await models.User.findAll({include: ['customer']});
     return users;
   }
 
@@ -35,7 +37,7 @@ class UserService {
     const user = await models.User.update(changes, {
       where: { id }
     })
-    
+
     return { id };
   }
 

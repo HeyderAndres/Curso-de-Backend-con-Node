@@ -1,4 +1,4 @@
-import { CustomerService } from "../services/customer.services.js";
+import { CustomerService } from "../services/customer.service.js";
 import { Router } from "express";
 import { validationHandler } from "../middlewares/validation.handler.js";
 import { createCustomerSchema, updateCustomerSchema, getCustomerSchema } from "../schema/customer.schema.js";

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import ProductsService from '../services/products.services.js';
+import ProductsService from '../services/products.service.js';
 import { validationHandler } from '../middlewares/validation.handler.js';
 import {
   createProductSchema,

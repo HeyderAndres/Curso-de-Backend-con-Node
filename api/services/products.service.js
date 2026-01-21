@@ -1,5 +1,6 @@
 import { models } from "../libs/sequelize.js";
 import boom from '@hapi/boom';
+import { Op } from "sequelize";
 
 
 class ProductsService {
@@ -10,8 +11,31 @@ class ProductsService {
     return newProduct;
   };
 
-  async find() {
-    const products = await models.Product.findAll();
+  async find(query) {
+    const options = {
+      include: ['category'],
+      where: {}
+    }
+
+    const { limit, offset, price, priceMin, priceMax} = query;
+
+    if (price) {
+      options.where.price = price;
+    }
+
+    if ( limit && offset ){
+      options.limit = limit;
+      options.offset =offset
+    }
+
+    if (priceMin && priceMax) {
+      options.where.price = {
+        [Op.gte]: priceMin,
+        [Op.lte]: priceMax
+      }
+    }
+
+    const products = await models.Product.findAll(options);
     return products;
   };
 

@@ -5,13 +5,14 @@ import {
   createProductSchema,
   updateProductSchema,
   getProductSchema,
+  queryProductSchema
 } from '../schema/product.schema.js';
 
 const router = Router();
 const service = new ProductsService();
 
-router.get('/', async (req, res) => {
-  const products = await service.find();
+router.get('/', validationHandler(queryProductSchema, 'query'), async (req, res) => {
+  const products = await service.find(req.query);
   res.json(products);
 });
 

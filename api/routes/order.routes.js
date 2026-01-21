@@ -1,6 +1,6 @@
 import { OrderService } from "../services/order.service.js";
 import { validationHandler } from "../middlewares/validation.handler.js";
-import { createOrderSchema, updateOrderSchema, getOrderSchema } from "../schema/order.schema.js";
+import { createOrderSchema, updateOrderSchema, getOrderSchema, addItemSchema } from "../schema/order.schema.js";
 import { Router } from "express";
 
 const router = Router();
@@ -25,6 +25,12 @@ router.patch('/:id', validationHandler(getOrderSchema, 'params'), validationHand
   res.json(updatedOrder);
 });
 
+router.post('/add-item', validationHandler(addItemSchema, 'body'), async (req, res) => {
+  const body = req.body;
+  const newItem = await service.addItem(body);
+  res.status(201).json(newItem);
+})
+
 router.get(
   '/:id',
   validationHandler(getOrderSchema, 'params'),
@@ -34,6 +40,8 @@ router.get(
     res.json(order);
   },
 );
+
+
 
 router.delete('/:id', validationHandler(getOrderSchema, 'params'), (req, res) => {
   const { id } = req.params;

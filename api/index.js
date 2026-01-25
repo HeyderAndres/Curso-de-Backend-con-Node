@@ -2,6 +2,8 @@ import express  from "express";
 import routerAPI from "./routes/index.js";
 import cors from "cors";
 import { logErrors, errorHandler, boomErrorHandler } from "./middlewares/error.handler.js";
+import passport   from "./utils/auth/index.js";
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,6 +22,8 @@ const options = {
 }
 
 app.use(cors(options));
+app.use(passport.initialize());
+
 routerAPI(app);
 
 app.get("/", (req, res) => {

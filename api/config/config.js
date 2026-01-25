@@ -8,7 +8,10 @@ const environments = {
     database: process.env.DB_NAME,
     port: process.env.DB_PORT || 5432,
   },
-
+  auth: {
+    apiKey: process.env.API_KEY,
+    jwtSecret: process.env.JWT_SECRET,
+  },
 };
 
 export { environments }

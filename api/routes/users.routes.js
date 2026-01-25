@@ -1,5 +1,6 @@
 import { Router } from "express";
 import UserService from "../services/user.service.js";
+import { validateApiKey } from "../middlewares/auth.handler.js";
 
 const router = Router();
 const service = new UserService();
@@ -9,7 +10,7 @@ router.get('/', async (req, res) => {
   res.json(users);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', validateApiKey, async (req, res) => {
   const body = req.body;
   const newUser = await service.create(body);
   res.status(201).json(newUser);
